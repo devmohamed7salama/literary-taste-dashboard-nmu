@@ -8,7 +8,7 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export default function QuestionCard({ question, answer, type, note, index, allAnswers = [], onAnswer }) {
+export default function QuestionCard({ question, answer, type, note, index, allAnswers = [], predefinedOptions, onAnswer }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -16,13 +16,20 @@ export default function QuestionCard({ question, answer, type, note, index, allA
   const options = useMemo(() => {
     if (type !== 'mcq') return [true, false];
     
+    // Use predefined options if they exist
+    if (predefinedOptions && predefinedOptions.length === 4) {
+      // Shuffle the predefined options so the answer isn't always in the same spot if we defined it that way
+      return [...predefinedOptions].sort(() => 0.5 - Math.random());
+    }
+    
+    // Fallback: Generate unique distractors
     const uniqueDistractors = [...new Set(allAnswers.filter(a => a !== answer))];
     const selectedDistractors = uniqueDistractors
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
     
     return [answer, ...selectedDistractors].sort(() => 0.5 - Math.random());
-  }, [type, answer, allAnswers]);
+  }, [type, answer, allAnswers, predefinedOptions]);
 
   const handleOptionClick = (option) => {
     if (isSubmitted) return;
