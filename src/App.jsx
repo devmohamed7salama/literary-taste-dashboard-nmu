@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import QuestionCard from './components/QuestionCard';
 import NoteCard from './components/NoteCard';
 import Glossary from './components/Glossary';
+import SectionStats from './components/SectionStats';
 import { data } from './data';
 
 export default function App() {
@@ -20,7 +21,7 @@ export default function App() {
     restDelta: 0.001
   });
 
-  // Extract all MCQ answers for distractor generation
+  // Extract all MCQ answers for distractor generation (as a fallback)
   const allAnswers = useMemo(() => {
     return data.sections
       .filter(s => s.type === 'mcq')
@@ -173,9 +174,20 @@ export default function App() {
                           answer={item.a}
                           note={item.note}
                           allAnswers={allAnswers}
+                          predefinedOptions={item.options}
                           onAnswer={(idx, status) => handleAnswer(`${section.id}-${idx}`, status)}
                         />
                       ))}
+                      
+                      {/* Sub-section Stats */}
+                      <SectionStats 
+                        items={section.items} 
+                        sectionAnswers={
+                          Object.fromEntries(
+                            Object.entries(answeredQuestions).filter(([key]) => key.startsWith(section.id))
+                          )
+                        } 
+                      />
                     </div>
                   )}
                 </div>
