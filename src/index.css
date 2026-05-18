@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #F5E6C8;
+  --color-paper-light: #FFFDF8;
+  --color-brown-dark: #4B2E1E;
+  --color-brown-soft: #8B5E3C;
+  --font-cairo: "Cairo", sans-serif;
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-cairo);
+    direction: rtl;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-brown-dark);
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+
+@utility paper-texture {
+  background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+}
+
+@utility manuscript-border {
+  border: 2px solid var(--color-brown-soft);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid var(--color-brown-soft);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-brown-soft);
+  border-radius: 10px;
+  opacity: 0.5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brown-dark);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brown-soft);
+  border-radius: 10px;
+  border: 2px solid var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brown-dark);
+}
