@@ -140,13 +140,13 @@ export default function App() {
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="mb-10 flex items-center gap-6"
+                  className="mb-10 flex items-center gap-3 md:gap-6"
                 >
-                  <div className="h-1 flex-1 bg-gradient-to-l from-brown-dark to-transparent rounded-full" />
-                  <h2 className="text-4xl font-black text-brown-dark px-4 whitespace-nowrap">
+                  <div className="h-1 flex-1 bg-gradient-to-l from-brown-dark to-transparent rounded-full hidden sm:block" />
+                  <h2 className="text-2xl md:text-4xl font-black text-brown-dark px-2 md:px-4 text-center leading-tight">
                     {section.title}
                   </h2>
-                  <div className="h-1 flex-1 bg-gradient-to-r from-brown-dark to-transparent rounded-full" />
+                  <div className="h-1 flex-1 bg-gradient-to-r from-brown-dark to-transparent rounded-full hidden sm:block" />
                 </motion.div>
 
                 <div className={section.type === 'glossary' ? 'space-y-0' : 'space-y-6'}>
